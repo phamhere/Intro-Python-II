@@ -34,6 +34,13 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# Room items
+room['outside'].items = ['torch', 'key']
+room['foyer'].items = ['broken glasses', 'flowers']
+room['overlook'].items = ['pendant']
+room['narrow'].items = []
+room['treasure'].items = ['gold', 'ring']
+
 #
 # Main
 #
@@ -50,9 +57,20 @@ p = Player(room['outside'])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+def describe_room(room):
+    print(p.room)
+    if p.room.items == []:
+        print('This room holds no items.')
+    else:
+        print(
+            f"This room holds {len(p.room.items)} item(s): {', '.join(p.room.items)}.")
+
+
 i = ''
 while i != 'q':
-    print(p.room)
+    describe_room(p.room)
     i = input('>> ')
 
     if i == 'n' and hasattr(p.room, 'n_to'):
